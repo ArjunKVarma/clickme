@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Me!</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector(".circle").onmouseover = () => {
+
+                function getRandomColor() {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+
+
+                function randno(min, max) {
+                    let diff = max - min;
+                    let rand = Math.floor(Math.random() * diff);
+                    rand = rand + min;
+                    return rand;
+                }
+                let randh = randno(0, 500);
+                let randw = randno(0, 700);
+                let col = getRandomColor();
+                let elem = document.querySelector('.circle').style;
+                elem.top = `${randh}px`;
+                elem.left = `${randw}px`;
+                elem.background = `${col}`;
+
+            }
+
+        })
+    </script>
+</head>
+<style>
+    body {
+        position: relative;
+        height: 100vh;
+        background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    }
+
+    .p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 800px;
+        height: 600px;
+        border: 2px solid gray;
+    }
+</style>
+
+<body>
+
+    <div class="p">
+        <a href="cong.html">
+            <div class="circle"
+            style="height: 100px; width: 100px; position: absolute; top: 40px; left: 50px;background: gold; text-align: center; line-height: 50px; border-radius: 50px;">
+            <h4 >Click me</h4>
+
+
+        </div>
+        </a>
+    </div>
+
+</body>
+
+</html>
