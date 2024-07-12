@@ -1,12 +1,91 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Me!</title>
+    <link rel="icon" href="icon.jpeg" type="image/icon type">
+    <script>
+        window.onload = function () {
+            var url = document.location.href;
+            var parts = url.split("=");
+            var last_part = parts[parts.length-1];
+            console.log(last_part)
+        }
+        var points = 0;
+        document.addEventListener('DOMContentLoaded', () => {
+            var url = document.location.href;
+            var parts = url.split("=");
+            var last_part = parts[parts.length-1];
+
+                display = document.querySelector('#time');
+            startTimer(last_part, display);
+            document.querySelector(".pulsating-circle").onclick = () => {
+                event.stopPropagation();
+                points += 1;
+
+
+
+                function randno(min, max) {
+                    let diff = max - min;
+                    let rand = Math.floor(Math.random() * diff);
+                    rand = rand + min;
+                    return rand;
+                }
+                let randh = randno(0, (window.screen.height - 150));
+                let randw = randno(0, (window.screen.width - 150));
+                let elem = document.querySelector('.pulsating-circle').style;
+                elem.top = `${randh}px`;
+                elem.left = `${randw}px`;
+                document.querySelector('#points').innerHTML = points
+
+
+            }
+            document.querySelector(".p").onclick = () => {
+
+               
+                testJS();
+
+            }
+
+        })
+        function testJS() {
+            var b = document.getElementById('points').innerHTML,
+            url = 'cong.html?points=' + encodeURIComponent(b);
+            console.log(b)
+            document.location.href = url;
+        }
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    testJS();
+
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+
+
+<body>
 
     <div class="p">
-        <div>
-          <h1 style="font-size: 10rem; margin-top: 30vh;">Your Score: <span id="title">0</span></h1>
-          <a href="index.html" style="color: rgb(60, 60, 60); text-decoration: none;"><h1>Play Again</h1></a>
-          <link rel="icon" href="icon.jpeg" type="image/icon type">
+        <div class="countdown">
+            <span id="time">0</span>
+            <h1 id="points">0</h1>
+        </div>
+        <div class="pulsating-circle">
+
         </div>
 
     </div>
@@ -71,7 +150,7 @@
 
     /* Main styles */
     body {
-      overflow: hidden;
+        overflow: hidden;
         margin-top: 13.5rem;
         color: #999;
         font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
@@ -186,12 +265,4 @@
         }
     }
 </style>
-<script>
-  window.onload = function () {
-      var url = document.location.href;
-      var parts = url.split("=");
-      var last_part = parts[parts.length-1];
-      document.getElementById('title').innerHTML = last_part;
-  }
-  </script> 
 </html>
